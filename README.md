@@ -29,7 +29,7 @@ python3 scoring_model.py               # Step 2
 ## Project Structure
 
 ```
-dip/
+RehabVision/
 ├── feature_extraction_opencv.py   # Step 1: Segment video into per-rep clips + signals
 ├── scoring_model.py               # Step 2: Train & evaluate ML scoring models
 ├── run_pipeline.sh                # Runs Step 1 → Step 2 end-to-end
@@ -50,18 +50,6 @@ dip/
 - `rep_N.mp4` — trimmed video clip of rep N
 - `rep_N_features.npy` — 1D smoothed motion signal for rep N (used as ML input)
 - `temporal_segments.json` — list of `{rep_idx, start_frame, end_frame, signal_type}`
-
-**How it works:**
-1. Extracts dominant semantic colour from the first frame
-2. Builds **4 parallel motion signals** from that colour region:
-   - `cy` — Y-centroid (captures vertical motion: leg raises, squats)
-   - `cx` — X-centroid (captures horizontal motion: arm swings, pendulum)
-   - `area` — mask pixel area (captures body expansion: squats, knee bends)
-   - `optical_flow` — mean Farneback flow magnitude (captures any motion)
-3. Picks the signal with highest variance as the primary segmentation signal
-4. Applies Butterworth low-pass filter (cutoff=1.5Hz, fs=30fps)
-5. Detects **valleys** = rep boundaries via `scipy.signal.find_peaks`
-6. Saves clips and `.npy` signals between consecutive valleys
 
 > **Note:** No ground truth is used in this step — segmentation is fully unsupervised.
 
