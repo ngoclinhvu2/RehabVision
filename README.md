@@ -2,7 +2,26 @@
 
 This project builds a computer-vision system that analyses images or video frames of a person performing selected exercises and classifies their posture as correct or potentially incorrect, giving simple form-feedback cues (e.g. “align your back”, “knee going too far forward”) to support safer home workouts.
 
-**Dataset:** [UcoPhyRehab++](https://github.com/AVAuco/ucophyrehab) — 27 subjects, 16 rehabilitation exercises, 5 camera angles, scored 1–5 per rep by physiotherapists.
+**Dataset:** [UcoPhyRehab++](https://zenodo.org/records/17935737) — 27 subjects, 16 rehabilitation exercises, 5 camera angles, scored 1–5 per rep by physiotherapists.
+
+---
+
+## Setup
+Before running the code, you need to download the dataset:
+1. Go to the [UcoPhyRehab++ repository](https://zenodo.org/records/17935737).
+2. Download the `semantic_segmentation` folder.
+3. Place the `semantic_segmentation` folder directly in the main directory of this project (alongside `run_pipeline.sh`).
+
+---
+
+## How to Run
+
+```bash
+bash run_pipeline.sh
+# OR separately:
+python3 feature_extraction_opencv.py   # Step 1
+python3 scoring_model.py               # Step 2
+```
 
 ---
 
@@ -74,17 +93,6 @@ dip/
 Confusion matrix (score 1–5) is also printed per model.
 
 **Output:** `pipeline_results.json` with all metrics for each model.
-
----
-
-## How to Run
-
-```bash
-bash run_pipeline.sh
-# OR separately:
-python3 feature_extraction_opencv.py   # Step 1
-python3 scoring_model.py               # Step 2
-```
 
 ---
 
