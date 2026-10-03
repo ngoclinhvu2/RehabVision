@@ -14,6 +14,7 @@ Before running the code, you need to download the dataset:
 
 ---
 
+
 ## How to Run
 
 ```bash
@@ -65,6 +66,7 @@ dip/
 > **Note:** No ground truth is used in this step — segmentation is fully unsupervised.
 
 ---
+
 
 ## Step 2 — `scoring_model.py`
 
